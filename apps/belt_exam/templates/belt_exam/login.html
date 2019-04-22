@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login and Registration</title>
+        <style>
+            .register{
+                border: 1px solid black;
+                padding: 20px;
+                width: 300px;
+            }
+            .login{
+                margin-top: 50px;
+                border: 1px solid black;
+                padding: 20px;
+                width: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h2>Welcome to Travel Planner!</h2>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="register">
+                <h3>Register:</h3>
+                <form action="/register" method="POST">
+                    {%csrf_token%}
+                    <label for="name">Name: </label>
+                    <input type="text" name="name"><br>
+                    <label for="username">Username :</label>
+                    <input type="text" name="username"><br>
+                    <label for="password">Password: </label>
+                    <input type="password" name="password"><br>
+                    <label for="password_confirm">Confirm Password: </label>
+                    <input type="password" name="password_confirm"><br>
+                    <input type="submit" value="Register!">
+                </form>
+            </div>
+            <div class="login">
+                <h3>Login:</h3>
+                <form action="/login" method="POST">
+                    {%csrf_token%}
+                    <label for="username">Username: </label>
+                    <input type="text" name="username"><br>
+                    <label for="password" name ="password">Password: </label>
+                    <input type="password" name="password"><br>
+                    <input type="submit" value="Login!">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

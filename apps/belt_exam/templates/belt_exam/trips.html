@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>List of Trips</title>
+        <style>
+            td{
+                border: 1px solid black;
+            }
+            th{
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Hello, {{user.username}}</h1>
+        <a href="/logout">Logout</a>
+        <h3>Your Trip Schedules</h3>
+        <table>
+            <tr>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Description</th>
+            </tr>
+            {% for my_trip in my_trips %}
+            <tr>
+                <td><a href="/travels/destination/{{my_trip.id}}">{{my_trip.destination}}</a></td>
+                <td>{{my_trip.trip_start}}</td>
+                <td>{{my_trip.trip_end}}</td>
+                <td>{{my_trip.description}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        <h3>Other User's Travel Plans</h3>
+        <table>
+            <tr>
+                <th>Name of other User</th>
+                <th>Destination</th>
+                <th>Travel Start date</th>
+                <th>Travel End date</th>
+                <th>Join?</th>
+            </tr>
+            {% for other_trip in other_trips %}
+            <tr>
+                <td>{{other_trip.creator.name}}</td>
+                <td><a href="/travels/destination/{{other_trip.id}}">{{other_trip.destination}}</a></td>
+                <td>{{other_trip.trip_start}}</td>
+                <td>{{other_trip.trip_end}}</td>
+                <td><a href="/join/{{other_trip.id}}">JOIN</a></td>
+            </tr>
+            {%endfor%}
+        </table>
+        <a href="/travels/add">Add a New Trip!</a>
+    </body>
+</html>
